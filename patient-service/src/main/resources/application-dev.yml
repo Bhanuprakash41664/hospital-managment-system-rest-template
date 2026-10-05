@@ -1,0 +1,15 @@
+# ---------------------------------------------------------
+# Local development settings
+# Every value can be overridden with an environment variable.
+# ---------------------------------------------------------
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/patient_db}
+    username: postgres
+    password: 1234
+  jpa:
+    show-sql: true
+
+logging:
+  level:
+    com.hospital.patient: DEBUG

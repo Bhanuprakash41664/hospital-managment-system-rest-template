@@ -1,0 +1,38 @@
+# ---------------------------------------------------------
+# Common settings (all environments)
+# Environment-specific values live in application-dev.yml / application-prod.yml
+# ---------------------------------------------------------
+server:
+  port: 8081
+
+spring:
+  application:
+    name: patient-service
+  profiles:
+    # Default profile is "dev". Override with the SPRING_PROFILES_ACTIVE environment variable.
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+  jpa:
+    # Never let the schema be changed by Hibernate; Flyway owns the schema.
+    hibernate:
+      ddl-auto: validate
+    # Avoids lazy loading in the web layer (recommended best practice)
+    open-in-view: false
+  flyway:
+    enabled: true
+  data:
+    web:
+      pageable:
+        default-page-size: 10
+        max-page-size: 50
+
+# Expose only the endpoints we need
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+      # Swagger UI: http://localhost:8081/swagger-ui.html
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
